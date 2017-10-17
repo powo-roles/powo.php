@@ -1,0 +1,23 @@
+---
+
+# packages by distribution
+pp_packages:
+  RedHat:
+    - php
+    - php-mysqlnd
+    - php-cli
+    - php-gd
+    - php-pgsql
+  Debian:
+    - php
+    - php-mysql
+    - php-cli
+    - php-gd
+    - php-pgsql
+    - libapache2-mod-php
+
+pp_httpd_service:
+  RedHat:
+    httpd
+  Debian:
+    apache2

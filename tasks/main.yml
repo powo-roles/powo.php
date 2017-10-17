@@ -1,0 +1,22 @@
+---
+
+- name: install
+  package:
+    name: "{{ item }}"
+  with_items: "{{ _pp_packages }}"
+  register: php_install
+
+- name: httpd service
+  service:
+    name: "{{ _pp_httpd_service }}"
+    state: started
+  ignore_errors: true
+  check_mode: true
+  register: httpd_service
+
+- name: httpd restart
+  service:
+    name: "{{ _pp_httpd_service }}"
+    state: started
+  # restart if php is installed and httpd service is up and running
+  when: php_install.changed and httpd_service | succeeded and not httpd_service.changed

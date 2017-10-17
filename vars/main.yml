@@ -1,0 +1,5 @@
+---
+
+# packages for the current distribution
+_pp_packages: "{{ pa_packages | distro(vars) }}"
+_pp_httpd_service: "{{ pp_httpd_service | distro(vars) }}"
