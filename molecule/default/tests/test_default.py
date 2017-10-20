@@ -7,4 +7,6 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 def test_package(host):
-    host.ansible("shell", "apachectl -S", check=True)
+    php = host.ansible("stat", "path=/usr/bin/php")
+    assert php['stat']['exists'] is True
+    assert php['stat']['xusr'] is True
