@@ -1,0 +1,23 @@
+---
+
+- name: httpd service
+  service:
+    name: "{{ _pp_httpd_service }}"
+    state: reloaded
+  ignore_errors: true
+  check_mode: true
+  changed_when: false
+  register: httpd_service
+
+- name: httpd restart
+  service:
+    name: "{{ _pp_httpd_service }}"
+    state: started
+  # restart httpd if php is installed
+  # and httpd service is available (success status cannot be relied upon)
+  # and httpd service is running
+  # this check is only compatible with systemd; always restart else
+  when: |
+    php_install.changed
+    and (httpd_service['status'] | default(False)) is mapping
+    and (httpd_service['status']['ActiveState'] | default('active')) == 'active'
