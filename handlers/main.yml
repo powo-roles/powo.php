@@ -1,6 +1,6 @@
 ---
 
-- name: pp:reload_httpd
+- name: pp:reload httpd
   block:
     - name: httpd service
       service:
