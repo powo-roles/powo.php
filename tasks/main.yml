@@ -19,8 +19,11 @@
   service:
     name: "{{ _pp_httpd_service }}"
     state: started
-  # restart if php is installed and httpd service is up and running
+  # restart httpd if php is installed
+  # and httpd service is available
+  # and httpd service is running
   # this check is only compatible with systemd; always restart else
   when: |
     php_install.changed
+    and httpd_service | succeeded
     and httpd_service['status']['ActiveState'] | default('active') == 'active'
