@@ -1,6 +1,8 @@
 ---
 
 - name: install
+  become: true
+  become_user: root
   package:
     name: "{{ item }}"
   with_items: "{{ _pp_packages }}"
