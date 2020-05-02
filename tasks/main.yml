@@ -7,4 +7,4 @@
     name: "{{ item }}"
   with_items: "{{ _pp_packages }}"
   register: php_install
-  notify: pp:reload httpd
+  notify: reload httpd
