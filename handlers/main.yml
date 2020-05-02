@@ -1,4 +1,8 @@
 ---
 
 - name: pp:reload httpd
-  import_tasks: httpd.yml
+  service:
+    name: "{{ _pp_httpd_service }}"
+    state: reloaded
+  ignore_errors: true
+  changed_when: false
